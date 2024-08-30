@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"qeo2lbo1d7tc6","package_name":"web3_credit_card","contract_name":"Web3CreditCard","module_path":"web3_credit_card::Web3CreditCard","artifacts":{"sierra":"web3_credit_card_Web3CreditCard.contract_class.json","casm":"web3_credit_card_Web3CreditCard.compiled_contract_class.json"}}]}
