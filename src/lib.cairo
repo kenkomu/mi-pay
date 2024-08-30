@@ -44,7 +44,6 @@ mod Web3CreditCard {
         card_number: felt252,
     }
 
-
     #[derive(Drop, starknet::Event)]
     struct PaymentProcessed {
         #[key]
@@ -61,6 +60,7 @@ mod Web3CreditCard {
 
     #[abi(embed_v0)]
     impl IWeb3CreditCard of super::IWeb3CreditCard<ContractState> {
+        //issues a new credit card to the caller
         fn issue_card(ref self: ContractState, card_number: felt252, duration_in_days: u64) {
             let caller = get_caller_address();
             let expiry_timestamp = get_block_timestamp() + duration_in_days * 86400;
@@ -71,12 +71,13 @@ mod Web3CreditCard {
                 active: true,
             };
 
-            self.card_owners.write(caller, card_info);
+            self.card_owners.write(caller, card_info);//store to card owners
             self.total_cards.write(self.total_cards.read() + 1);
 
-            self.emit(CardIssued { owner: caller, card_number: card_number });
+            self.emit(CardIssued { owner: caller, card_number: card_number });//event
         }
 
+        //sets the conversion rate
         fn set_conversion_rate(ref self: ContractState, currency: felt252, rate: u128) {
             let caller = get_caller_address();
             if caller != self.owner.read() {
@@ -85,27 +86,31 @@ mod Web3CreditCard {
             self.conversion_rates.write(currency, rate);
         }
 
+        //stores a payment for specific currency
         fn process_payment(ref self: ContractState, currency: felt252, amount: u128) {
             let caller = get_caller_address();
-            let rate = self.conversion_rates.read(currency).unwrap_or(0);
+            let rate = self.conversion_rates.read(currency);
+            if rate == 0 {
+                panic!("Invalid currency");
+            }
             let fiat_amount = amount * rate;
 
-            let mut balance = self.balances.read(caller).unwrap_or(0);
+            let balance = self.balances.read(caller);
             if balance < fiat_amount {
                 panic!("Insufficient balance");
             }
             
-            balance -= fiat_amount;
-            self.balances.write(caller, balance);
+            self.balances.write(caller, balance - fiat_amount);
 
             self.emit(PaymentProcessed { owner: caller, amount: fiat_amount, currency: currency });
         }
 
         fn is_card_active(self: @ContractState, address: ContractAddress) -> bool {
-            let card_info = self.card_owners.read(address).unwrap();
+            let card_info = self.card_owners.read(address);
             card_info.active && get_block_timestamp() < card_info.expiry_timestamp
         }
 
+        // retrieves the address of the contract owner
         fn get_owner(self: @ContractState) -> ContractAddress {
             self.owner.read()
         }
