@@ -1,0 +1,168 @@
+[
+    {
+        "type": "impl",
+        "name": "IWeb3CreditCard",
+        "interface_name": "web3_credit_card::IWeb3CreditCard"
+    },
+    {
+        "type": "enum",
+        "name": "core::bool",
+        "variants": [
+            {
+                "name": "False",
+                "type": "()"
+            },
+            {
+                "name": "True",
+                "type": "()"
+            }
+        ]
+    },
+    {
+        "type": "interface",
+        "name": "web3_credit_card::IWeb3CreditCard",
+        "items": [
+            {
+                "type": "function",
+                "name": "issue_card",
+                "inputs": [
+                    {
+                        "name": "card_number",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "duration_in_days",
+                        "type": "core::integer::u64"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "set_conversion_rate",
+                "inputs": [
+                    {
+                        "name": "currency",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "rate",
+                        "type": "core::integer::u128"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "process_payment",
+                "inputs": [
+                    {
+                        "name": "currency",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "amount",
+                        "type": "core::integer::u128"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "is_card_active",
+                "inputs": [
+                    {
+                        "name": "address",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "type": "core::bool"
+                    }
+                ],
+                "state_mutability": "view"
+            },
+            {
+                "type": "function",
+                "name": "get_owner",
+                "inputs": [],
+                "outputs": [
+                    {
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "state_mutability": "view"
+            }
+        ]
+    },
+    {
+        "type": "constructor",
+        "name": "constructor",
+        "inputs": [
+            {
+                "name": "owner",
+                "type": "core::starknet::contract_address::ContractAddress"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "web3_credit_card::Web3CreditCard::CardIssued",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "owner",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "key"
+            },
+            {
+                "name": "card_number",
+                "type": "core::felt252",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "web3_credit_card::Web3CreditCard::PaymentProcessed",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "owner",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "key"
+            },
+            {
+                "name": "amount",
+                "type": "core::integer::u128",
+                "kind": "data"
+            },
+            {
+                "name": "currency",
+                "type": "core::felt252",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "web3_credit_card::Web3CreditCard::Event",
+        "kind": "enum",
+        "variants": [
+            {
+                "name": "CardIssued",
+                "type": "web3_credit_card::Web3CreditCard::CardIssued",
+                "kind": "nested"
+            },
+            {
+                "name": "PaymentProcessed",
+                "type": "web3_credit_card::Web3CreditCard::PaymentProcessed",
+                "kind": "nested"
+            }
+        ]
+    }
+]
