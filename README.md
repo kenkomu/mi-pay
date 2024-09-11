@@ -99,9 +99,10 @@ A popular decentralized credit card platform can significantly raise awareness a
 
  # Installation
 
- 1. clone the repository
-  git clone https://github.com/yourusername/web3-credit-card-app.git
-cd web3-credit-card-app
+ 1. `clone the repository`
+  git clone https://github.com/kenkomu/CreditcardWeb3
+
+    `cd web3-credit-card-app`
 
 
 
