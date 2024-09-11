@@ -92,10 +92,10 @@ The success of this platform will elevate the visibility and brand of the blockc
 A popular decentralized credit card platform can significantly raise awareness about blockchain technology and its advantages over traditional financial systems.
 
 # Technologies Used
-  Frontend: React, Web3.js for wallet connection.
-  Backend: Node.js.
-  Blockchain: Solidity for smart contract development, Ethereum.
-  Fiat Payment Integration: To facilitate fiat payments (optional, based on integration).
+  1. Frontend: React, Web3.js for wallet connection.
+  2. Backend: Node.js.
+  3. Blockchain: Solidity for smart contract development, Ethereum.
+  4. Fiat Payment Integration: To facilitate fiat payments (optional, based on integration).
 
  # Installation
 
@@ -112,7 +112,7 @@ cd web3-credit-card-app
 
 3. Deploy the smart contract:
 
-Navigate to the contracts directory and deploy the smart contract using a platform like Hardhat or Truffle.
+` Navigate to the contracts directory and deploy the smart contract using a platform like Hardhat or Truffle.`
 
 
 
