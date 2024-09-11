@@ -92,18 +92,18 @@ The success of this platform will elevate the visibility and brand of the blockc
 A popular decentralized credit card platform can significantly raise awareness about blockchain technology and its advantages over traditional financial systems.
 
 # Technologies Used
- . Frontend: React, Web3.js for wallet connection.
- . Backend: Node.js.
- . Blockchain: Solidity for smart contract development, Ethereum.
- . Fiat Payment Integration: To facilitate fiat payments (optional, based on integration).
+  Frontend: React, Web3.js for wallet connection.
+  Backend: Node.js.
+  Blockchain: Solidity for smart contract development, Ethereum.
+  Fiat Payment Integration: To facilitate fiat payments (optional, based on integration).
 
  # Installation
 
  1. clone the repository
-  ` git clone https://github.com/yourusername/web3-credit-card-app.git
+  git clone https://github.com/yourusername/web3-credit-card-app.git
 cd web3-credit-card-app
 
-`
+
 
 2. Install the Dependancies 
 
