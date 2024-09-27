@@ -2,11 +2,12 @@ use core::starknet::ContractAddress;
 
 #[starknet::interface]
 pub trait IWeb3CreditCard<TContractState> {
-    fn issue_card(ref self: TContractState, card_number: felt252, duration_in_days: u64);
+    fn issue_card(ref self: TContractState);
     fn set_conversion_rate(ref self: TContractState, currency: felt252, rate: u128);
     fn process_payment(ref self: TContractState, currency: felt252, amount: u128);
     fn is_card_active(self: @TContractState, address: ContractAddress) -> bool;
     fn get_owner(self: @TContractState) -> ContractAddress;
+    fn get_total_cards(self: @TContractState) -> u128;
 }
 
 #[starknet::contract]
@@ -61,20 +62,22 @@ mod Web3CreditCard {
     #[abi(embed_v0)]
     impl IWeb3CreditCard of super::IWeb3CreditCard<ContractState> {
         //issues a new credit card to the caller
-        fn issue_card(ref self: ContractState, card_number: felt252, duration_in_days: u64) {
+        fn issue_card(ref self: ContractState) {
             let caller = get_caller_address();
-            let expiry_timestamp = get_block_timestamp() + duration_in_days * 86400;
+            let expiry_timestamp = get_block_timestamp() + 7 * 86400; // Default 7 days
+
+            let card_number = self.total_cards.read() + 1; // Auto-increment card number
             
             let card_info = CardInfo {
-                card_number: card_number,
+                card_number: card_number.into(), // convert u128 to felt252
                 expiry_timestamp: expiry_timestamp,
                 active: true,
             };
 
-            self.card_owners.write(caller, card_info);//store to card owners
-            self.total_cards.write(self.total_cards.read() + 1);
+            self.card_owners.write(caller, card_info); // store to card owners
+            self.total_cards.write(card_number); // update total cards
 
-            self.emit(CardIssued { owner: caller, card_number: card_number });//event
+            self.emit(CardIssued { owner: caller, card_number: card_number.into() }); // event
         }
 
         //sets the conversion rate
@@ -113,6 +116,11 @@ mod Web3CreditCard {
         // retrieves the address of the contract owner
         fn get_owner(self: @ContractState) -> ContractAddress {
             self.owner.read()
+        }
+
+        // retrieves the total number of cards issued
+        fn get_total_cards(self: @ContractState) -> u128 {
+            self.total_cards.read()
         }
     }
 }
