@@ -1,9 +1,17 @@
-import React from 'react'
+"use client"
 
-const Transfer = () => {
+import { useState } from 'react'
+import '@/app/globals.css'
+import SwapInterface from '@/components/avnu/AVNU'
+
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <div>Transfer</div>
+    <>
+     <SwapInterface />
+    </>
   )
 }
 
-export default Transfer
+export default App
