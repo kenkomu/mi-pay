@@ -3,8 +3,9 @@ import { RpcProvider } from 'starknet';
 import axios from 'axios';
 import { ADDRESSES } from '../../constants';
 import { AddressesType } from '../../types';
-import { toHex, parseUnits } from 'viem'
+import { toHex, parseUnits } from 'viem';
 
+// Load environment variables
 const takerAddress = process.env.NEXT_PUBLIC_KEY;
 const privateKey = process.env.NEXT_PRIVATE_KEY;
 const accountAddress = process.env.NEXT_ACCOUNT_ADDRESS;
@@ -23,6 +24,15 @@ class StarknetSwap {
 
   constructor() {
     this.provider = new RpcProvider({ nodeUrl: 'https://free-rpc.nethermind.io/mainnet-juno' });
+
+    // Debugging: Check if variables are defined
+    console.log('Account Address:', accountAddressString);
+    console.log('Private Key:', privateKeyString);
+
+    if (!accountAddressString || !privateKeyString) {
+      throw new Error('Account address and private key must be defined');
+    }
+
     this.account = new Account(this.provider, accountAddressString, privateKeyString);
   }
 
@@ -34,13 +44,13 @@ class StarknetSwap {
     const sellTokenAddress = ADDRESSES[sellToken as keyof AddressesType].SN_MAIN;
     const buyTokenAddress = ADDRESSES[buyToken as keyof AddressesType].SN_MAIN;
 
-    let sellAmount: string
+    let sellAmount: string;
     if (sellToken === "ETH") {
-      sellAmount = toHex(parseUnits(amount, 18)) // 18 decimals for ETH
+      sellAmount = toHex(parseUnits(amount, 18)); // 18 decimals for ETH
     } else if (buyToken === "ETH") {
-      sellAmount = toHex(parseUnits(amount, 6))  // 6 decimals for USDC
+      sellAmount = toHex(parseUnits(amount, 6));  // 6 decimals for USDC
     } else {
-      throw new Error("Unsupported token pair")
+      throw new Error("Unsupported token pair");
     }
 
     const url = `https://starknet.api.avnu.fi/swap/v2/quotes?sellTokenAddress=${sellTokenAddress}&buyTokenAddress=${buyTokenAddress}&sellAmount=${sellAmount}&size=1`;
@@ -74,12 +84,10 @@ class StarknetSwap {
     return response.transaction_hash;
   }
 
-
-
   public async swapEthToUsdc(amount: string): Promise<string> {
     try {
       const quote = await this.getQuote("ETH", "USDC", amount);
-      const calldata = await this.buildSwapCalldata(quote.quoteId, 0.05, true,accountAddress);
+      const calldata = await this.buildSwapCalldata(quote.quoteId, 0.05, true, accountAddressString);
       const calls = this.convertToCall(calldata.calls);
       return await this.executeTransactions(calls);
     } catch (e) {
@@ -91,7 +99,7 @@ class StarknetSwap {
   public async swapUsdcToEth(amount: string): Promise<string> {
     try {
       const quote = await this.getQuote("USDC", "ETH", amount);
-      const calldata = await this.buildSwapCalldata(quote.quoteId, 0.05, true,accountAddress);
+      const calldata = await this.buildSwapCalldata(quote.quoteId, 0.05, true, accountAddressString);
       const calls = this.convertToCall(calldata.calls);
       return await this.executeTransactions(calls);
     } catch (e) {
@@ -108,6 +116,5 @@ class StarknetSwap {
     }));
   }
 }
-
 
 export default StarknetSwap;
