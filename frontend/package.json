@@ -33,7 +33,9 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "viem": "^2.21.23",
-    "web3": "^4.12.1"
+    "web3": "^4.12.1",
+    "stripe": "^17.1.0"
+
   },
   "devDependencies": {
     "@types/node": "^20",
