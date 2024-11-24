@@ -110,7 +110,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <p className="text-gray-600 mb-4">"This Web3 credit card has revolutionized how I spend my crypto. It's so convenient!"</p>
+              {/* <p className="text-gray-600 mb-4">"This Web3 credit card has revolutionized how I spend my crypto. It's so convenient!"</p> */}
               <p className="font-semibold">- Happy User {index + 1}</p>
             </motion.div>
           ))}
