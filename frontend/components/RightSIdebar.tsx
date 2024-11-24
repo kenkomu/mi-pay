@@ -8,7 +8,12 @@ import React, { useState } from 'react';
 
 dotenv.config();
 
-const RightSidebar = ({ user, banks }) => {
+interface RightSidebarProps {
+  user: string;
+  banks: string;
+}
+
+const RightSidebar:  React.FC<RightSidebarProps> = ({ user, banks }) => {
   const [loading, setLoading] = useState<boolean>(false); // State for loading indication
   const [cardDetails, setCardDetails] = useState<any>(null); // To store card details after creation
 
