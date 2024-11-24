@@ -1,3 +1,4 @@
+import { TotlaBalanceBoxProps } from '@/types';
 import AnimatedCounter from './AnimatedCounter';
 import DoughnutChart from './DoughnutChart';
 
