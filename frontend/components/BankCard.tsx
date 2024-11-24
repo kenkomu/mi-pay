@@ -3,7 +3,7 @@ import React from 'react';
 interface BankCardProps {
   userName: string;
   cardNumber?: string;
-  expiration?: boolean;
+  expiration: string;
 }
 
 const BankCard: React.FC<BankCardProps> = ({userName, cardNumber, expiration = true }) => {
