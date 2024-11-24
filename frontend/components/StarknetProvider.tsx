@@ -1,11 +1,9 @@
 import React from "react";
-import { Account, Provider, Contract } from 'starknet'; 
 import { InjectedConnector } from "starknetkit/injected";
 import { ArgentMobileConnector, isInArgentMobileAppBrowser } from "starknetkit/argentMobile";
 import { WebWalletConnector } from "starknetkit/webwallet";
 import { mainnet, sepolia } from "@starknet-react/chains";
 import { StarknetConfig, publicProvider } from "@starknet-react/core";
-import abi from '../app/(root)/MyContractAbi.json'; // Import ABI
 
 interface StarknetProviderProps {
     children: React.ReactNode;

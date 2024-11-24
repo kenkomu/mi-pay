@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BankCard = ({ account, userName, cardNumber, expiration, showBalance = true }) => {
+const BankCard = ({userName, cardNumber, expiration = true }) => {
   return (
     <div className="flex flex-col">
       <div className="bank-card">

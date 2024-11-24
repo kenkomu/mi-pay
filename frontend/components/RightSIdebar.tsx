@@ -5,14 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BankCard from './BankCard';
 import React, { useState } from 'react';
-import abi from '../app/(root)/MyContractAbi.json'; // Import ABI
-import { Account, Contract } from 'starknet'; // Note: Using Account instead of Provider
-import { RpcProvider } from 'starknet';
 
 dotenv.config();
 
 const RightSidebar = ({ user, banks }) => {
-  const [owner, setOwner] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false); // State for loading indication
   const [cardDetails, setCardDetails] = useState<any>(null); // To store card details after creation
 
@@ -24,7 +20,6 @@ const RightSidebar = ({ user, banks }) => {
   const { address } = useAccount(); // Get address from useAccount
   const { disconnect } = useDisconnect(); // Get the proper disconnect function from useDisconnect
 
-  const DURATION_IN_DAYS = 7; // Fixed duration for all cards
 
   // Function to format the wallet address to show the first 5 and last 4 characters
   const formatAddress = (addr: string) => {

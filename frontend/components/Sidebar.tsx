@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const Sidebar = ({ user }: SiderbarProps) => {
+const Sidebar = ({ }: SiderbarProps) => {
   const pathname = usePathname();
 
   return (

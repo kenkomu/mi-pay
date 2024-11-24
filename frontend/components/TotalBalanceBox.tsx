@@ -1,6 +1,5 @@
 import AnimatedCounter from './AnimatedCounter';
 import DoughnutChart from './DoughnutChart';
-import { formatAmount } from '@/lib/utils';
 
 const TotalBalanceBox = ({
   accounts = [], totalBanks, totalCurrentBalance

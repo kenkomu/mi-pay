@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { CreditCard, Wallet, ShieldCheck, Globe, ChevronDown, ChevronUp } from 'lucide-react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 

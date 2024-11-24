@@ -4,9 +4,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { sidebarLinks } from "@/constants"
@@ -15,7 +12,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-const MobileNav = ({ user }: MobileNavProps) => {
+const MobileNav = ({ }: MobileNavProps) => {
   const pathname = usePathname();
 
   return (
