@@ -1,4 +1,4 @@
-import { Account, CallData, Call, uint256 } from 'starknet';
+import { Account, CallData, Call } from 'starknet';
 import { RpcProvider } from 'starknet';
 import axios from 'axios';
 import { ADDRESSES } from '../../constants';
