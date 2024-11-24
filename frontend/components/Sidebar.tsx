@@ -1,5 +1,4 @@
 'use client'
-
 import { sidebarLinks } from '@/constants'
 import { cn } from '@/lib/utils'
 import { SiderbarProps } from '@/types'
@@ -8,7 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const Sidebar = ({ }: SiderbarProps) => {
-  const pathname = usePathname();
+  const pathname = usePathname(); // Moved to top level
 
   return (
     <section className="sidebar">
@@ -25,10 +24,12 @@ const Sidebar = ({ }: SiderbarProps) => {
         </Link>
 
         {sidebarLinks.map((item) => {
-          const pathname = usePathname();
           const isActive = pathname ? pathname === item.route || pathname.startsWith(`${item.route}/`) : false;
+          
           return (
-            <Link href={item.route} key={item.label}
+            <Link 
+              href={item.route} 
+              key={item.label}
               className={cn('sidebar-link', { 'bg-bank-gradient': isActive })}
             >
               <div className="relative size-6">
@@ -45,15 +46,13 @@ const Sidebar = ({ }: SiderbarProps) => {
                 {item.label}
               </p>
             </Link>
-          )
+          );
         })}
-
         USER
       </nav>
-
       FOOTER
     </section>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
