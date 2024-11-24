@@ -81,7 +81,7 @@ const Home = () => {
 
         <RightSidebar
           user={loggedIn}
-          banks={[{ currentBalance: 123.50 }, { currentBalance: 500.50 }]}
+          banks={[{ $id: "123.50" }, { $id: "500.50" }]}
         />
       </section>
     </StarknetProvider>
